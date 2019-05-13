@@ -2,6 +2,7 @@ import React, { useEffect, useReducer } from "react";
 import "./App.css";
 import Field from "../Field";
 import Score from "../Score";
+import GameOver from "../GameOver";
 import useArrowKeyPress from "../Hooks/useKeyPress";
 import { makeMove, genField } from "../GameEngine";
 
@@ -10,9 +11,13 @@ function App() {
     switch (action.type) {
       case "move":
         const result = makeMove(state.field, action.direction);
-        return { field: result.matrix, score: state.score + result.sum };
+        return {
+          field: result.matrix,
+          score: state.score + result.sum,
+          gameOver: !result.canMove
+        };
       case "new":
-        return { field: genField(), score: 0 };
+        return { field: genField(), score: 0, gameOver: false };
       default:
         return state;
     }
@@ -20,7 +25,8 @@ function App() {
 
   const [state, dispatch] = useReducer(reducer, {
     field: genField(),
-    score: 0
+    score: 0,
+    gameOver: true
   });
   const key = useArrowKeyPress();
 
@@ -32,6 +38,7 @@ function App() {
 
   return (
     <div className="main">
+      {state.gameOver && <GameOver dispatch={dispatch} />}
       <Score value={state.score} />
       <Field data={state.field} />
     </div>

@@ -21,13 +21,36 @@ function shuffle(arr) {
 export function makeMove(matrix, direction) {
   const result = moveMatrix(matrix, direction);
 
-  console.log(result);
-
   if (JSON.stringify(matrix) !== JSON.stringify(result.matrix)) {
     result.matrix = addNewCell(result.matrix);
   }
 
+  result.canMove = canMove(result.matrix);
+
   return result;
+}
+
+function canMove(matrix) {
+  if (hasEmptyCells(matrix)) {
+    return true;
+  }
+
+  for (let rowIdx = 0; rowIdx < matrix.length; rowIdx++) {
+    for (let cellIdx = 0; cellIdx < matrix[0].length; cellIdx++) {
+      const cell = matrix[rowIdx][cellIdx];
+
+      if (
+        (rowIdx > 0 && matrix[rowIdx - 1][cellIdx] === cell) ||
+        (cellIdx < 3 && matrix[rowIdx][cellIdx + 1] === cell) ||
+        (rowIdx < 3 && matrix[rowIdx + 1][cellIdx] === cell) ||
+        (cellIdx > 0 && matrix[rowIdx][cellIdx - 1] === cell)
+      ) {
+        return true;
+      }
+    }
+  }
+
+  return false;
 }
 
 function moveMatrix(matrix, direction) {
