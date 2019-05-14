@@ -1,10 +1,20 @@
 .cell {
   width: 40px;
   height: 40px;
-  border: 1px solid black;
+  border: none;
   border-radius: 5px;
 
   display: flex;
   justify-content: center;
   align-items: center;
+
+  background-color: #eee4da;
+}
+
+.cell--empty {
+  background-color: #d0bdab;
+}
+
+.cell--transparent {
+  background: none;
 }

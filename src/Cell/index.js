@@ -2,7 +2,8 @@ import React from "react";
 import "./Cell.css";
 
 function Cell({ value }) {
-  return <div className="cell">{value ? value : ""}</div>;
+  const className = `cell ${!value ? "cell--transparent" : ""}`;
+  return <div className={className}>{value ? value : ""}</div>;
 }
 
 export default Cell;

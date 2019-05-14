@@ -6,6 +6,12 @@ import GameOver from "../GameOver";
 import useArrowKeyPress from "../Hooks/useKeyPress";
 import { makeMove, genField } from "../GameEngine";
 
+const initState = {
+  field: genField(),
+  score: 0,
+  gameOver: false
+};
+
 function App() {
   const reducer = (state, action) => {
     switch (action.type) {
@@ -23,11 +29,7 @@ function App() {
     }
   };
 
-  const [state, dispatch] = useReducer(reducer, {
-    field: genField(),
-    score: 0,
-    gameOver: true
-  });
+  const [state, dispatch] = useReducer(reducer, initState);
   const key = useArrowKeyPress();
 
   useEffect(() => {

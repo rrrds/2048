@@ -1,0 +1,28 @@
+.field-base {
+  position: relative;
+  overflow: hidden;
+}
+
+.field {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-gap: 5px;
+  padding: 5px;
+  background-color: #bbada0;
+  border-radius: 5px;
+}
+
+.field--transparent {
+  position: absolute;
+  top: 0;
+  transition-property: top;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+  background: none;
+}
+
+.position-1-1 {
+  grid-row: 1;
+  grid-column: 1;
+}
